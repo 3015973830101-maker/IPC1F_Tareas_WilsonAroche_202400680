@@ -16,6 +16,10 @@ public class Main {
 
         mostrarDatos(edad, promedio, seccion, activo);
 
+        int[] numeros = leerArreglo();
+
+        mostrarResultadosArreglo(numeros);
+
         mostrarFin();
 
         scanner.close();
@@ -24,7 +28,7 @@ public class Main {
     // Muestra el mensaje inicial del programa
     static void mostrarInicio() {
         System.out.println("===== TAREA 2 =====");
-        System.out.println("Tipos de datos y validaciones");
+        System.out.println("Tipos de datos, arreglos y validaciones");
         System.out.println();
     }
 
@@ -41,6 +45,7 @@ public class Main {
             String entrada = scanner.nextLine();
 
             try {
+
                 int numero = Integer.parseInt(entrada);
 
                 if (numero >= minimo && numero <= maximo) {
@@ -60,7 +65,12 @@ public class Main {
         }
     }
 
-    static void mostrarDatos(int edad, double promedio, char seccion, boolean activo) {
+    static void mostrarDatos(
+        int edad,
+        double promedio,
+        char seccion,
+        boolean activo
+    ) {
 
         System.out.println();
         System.out.println("===== DATOS =====");
@@ -68,6 +78,67 @@ public class Main {
         System.out.println("Promedio: " + promedio);
         System.out.println("Seccion: " + seccion);
         System.out.println("Activo: " + activo);
+    }
+
+    static int[] leerArreglo() {
+
+        System.out.println();
+        System.out.println("===== ARREGLO DE UNA DIMENSION =====");
+
+        int cantidad = leerEnteroEnRango(
+            "Cuantos numeros desea ingresar (1-10): ",
+            1,
+            10
+        );
+
+        int[] numeros = new int[cantidad];
+
+        for (int i = 0; i < numeros.length; i++) {
+
+            numeros[i] = leerEnteroEnRango(
+                "Ingrese el numero " + (i + 1) + " (1-100): ",
+                1,
+                100
+            );
+        }
+
+        return numeros;
+    }
+
+    static void mostrarResultadosArreglo(int[] numeros) {
+
+        int mayor = numeros[0];
+        int menor = numeros[0];
+        int suma = 0;
+
+        for (int i = 0; i < numeros.length; i++) {
+
+            if (numeros[i] > mayor) {
+                mayor = numeros[i];
+            }
+
+            if (numeros[i] < menor) {
+                menor = numeros[i];
+            }
+
+            suma += numeros[i];
+        }
+
+        double promedioArreglo = (double) suma / numeros.length;
+
+        System.out.println();
+        System.out.println("===== RESULTADOS DEL ARREGLO =====");
+
+        System.out.print("Valores: ");
+
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.print(numeros[i] + " ");
+        }
+
+        System.out.println();
+        System.out.println("Valor mayor: " + mayor);
+        System.out.println("Valor menor: " + menor);
+        System.out.println("Promedio: " + promedioArreglo);
     }
 
     static void mostrarFin() {
